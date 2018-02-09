@@ -12,12 +12,11 @@ const users = require('./routes/users');
 
 const app = express();
 
-const mongoDB = 'mongodb://127.0.0.1/my_database';
-
+//Set up mongoose connection
+const mongoose = require('mongoose');
+const mongoDB = 'mongodb://<admin>:<admin123>@ds135917.mlab.com:35917/mymixtape';
 mongoose.connect(mongoDB);
-// Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
-//Get the default connection
 const db = mongoose.connection;
 
 //Bind connection to error event (to get notification of connection errors)
