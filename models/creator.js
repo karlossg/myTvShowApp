@@ -13,7 +13,7 @@ const CreatorSchema = new Schema({
 CreatorSchema
   .virtual('name')
   .get(function () {
-    return `${this.last_name}`, ${ this.first_name };
+    return `${this.last_name}, ${this.first_name}`;
   })
 
 //virtual for creators url
