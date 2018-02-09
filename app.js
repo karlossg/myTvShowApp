@@ -13,8 +13,7 @@ const users = require('./routes/users');
 const app = express();
 
 //Set up mongoose connection
-const mongoose = require('mongoose');
-const mongoDB = 'mongodb://<admin>:<admin123>@ds135917.mlab.com:35917/mymixtape';
+const mongoDB = 'mongodb://admin:admin123@ds135917.mlab.com:35917/mymixtape';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
