@@ -23,3 +23,5 @@ CreatorSchema
     return `/catalog/creator/${this._id}`
   })
 
+//export model
+module.exports = mongoose.model('Creator', CreatorSchema);
