@@ -57,7 +57,7 @@ function genreCreate(name, cb) {
   });
 }
 
-function showCreate(title, summary, creator, imdb_id, genre, cb) {
+function showCreate(title, summary, imdb_id, creator, genre, cb) {
   showdetail = {
     title: title,
     summary: summary,
