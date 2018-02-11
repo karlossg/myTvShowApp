@@ -24,5 +24,17 @@ CreatorSchema
     return `/catalog/creator/${this._id}`
   })
 
+CreatorSchema
+  .virtual('date_of_birth_formatted')
+  .get(function () {
+    return this.date_of_birth ? moment(this.date_of_birth).format('DD-MM-YYYY') : '';
+  })
+
+CreatorSchema
+  .virtual('date_of_death_formatted')
+  .get(function () {
+    return this.date_of_death ? moment(this.date_of_death).format('DD-MM-YYYY') : '';
+  })
+
 //export model
 module.exports = mongoose.model('Creator', CreatorSchema);
