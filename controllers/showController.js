@@ -23,7 +23,13 @@ exports.index = function (req, res) {
 
 // Display list of all shows.
 exports.show_list = function (req, res) {
-  res.send('NOT IMPLEMENTED: Show list');
+  Show.find({}, 'title creator')
+    .populate('creator')
+    .exec(function (err, list_shows) {
+      if (err) { return next(err); }
+      //Successful, so render
+      res.render('show_list', { title: 'Show List', show_list: list_shows });
+    });
 };
 
 // Display detail page for a specific show.
