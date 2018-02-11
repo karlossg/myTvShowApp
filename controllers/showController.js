@@ -1,7 +1,24 @@
 const Show = require('../models/show');
+const Creator = require('../models/creator');
+const Genre = require('../models/genre');
+
+const async = require('async');
 
 exports.index = function (req, res) {
-  res.send('NOT IMPLEMENTED: Site Home Page');
+
+  async.parallel({
+    show_count: function (callback) {
+      Show.count(callback);
+    },
+    creator_count: function (callback) {
+      Creator.count(callback);
+    },
+    genre_count: function (callback) {
+      Genre.count(callback);
+    },
+  }, function (err, results) {
+    res.render('index', { title: 'My Tv Shows Home Page', error: err, data: results });
+  });
 };
 
 // Display list of all shows.
