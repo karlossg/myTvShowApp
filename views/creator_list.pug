@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  
+  ul
+  each creator in creator_list
+    li 
+      a(href=creator.url) #{creator.name} 
+      | (#{creator.date_of_birth} - #{creator.date_of_death})
+
+  else
+    li There are no show creators.

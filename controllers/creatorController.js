@@ -7,7 +7,7 @@ exports.creator_list = function (req, res) {
     .exec(function (err, list_creators) {
       if (err) { return next(err); }
       //Successful, so render
-      res.render('creator_list', { title: 'Show Cretor List', creator_list: list_creators });
+      res.render('creator_list', { title: 'Show Creator List', creator_list: list_creators });
     });
 };
 
