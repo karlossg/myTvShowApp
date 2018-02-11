@@ -14,7 +14,7 @@ const catalog = require('./routes/catalog');
 const app = express();
 
 //Set up mongoose connection
-const mongoDB = 'mongodb://admin:admin123@ds135917.mlab.com:35917/mymixtape';
+const mongoDB = 'mongodb://karlossg:shows123@ds129428.mlab.com:29428/my_tv_shows';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;

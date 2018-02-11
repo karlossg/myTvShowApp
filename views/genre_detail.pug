@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 Genre: #{genre.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Shows
+
+    dl
+    each show in genre_shows
+      dt 
+        a(href=show.url) #{show.title}
+      dd #{show.summary}
+
+    else
+      p This genre has no shows
