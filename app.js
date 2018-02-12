@@ -16,7 +16,7 @@ const helmet = require('helmet');
 const app = express();
 
 //Set up mongoose connection
-const mongoDB = 'mongodb://karlossg:shows123@ds129428.mlab.com:29428/my_tv_shows';
+const mongoDB = process.env.MONGODB_URI || 'mongodb://karlossg:shows123@ds129428.mlab.com:29428/my_tv_shows';
 mongoose.connect(mongoDB);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
