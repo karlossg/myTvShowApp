@@ -148,7 +148,11 @@ exports.show_create_post = [
 
 // Display show delete form on GET.
 exports.show_delete_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: Show delete GET');
+  Show.findById(req.params.id).exec(function (err, show) {
+    if (err) { return next(err) };
+    //Successful, so render
+    res.render('show_delete', { title: 'Delete Show', show: show });
+  }   
 };
 
 // Handle show delete on POST.
