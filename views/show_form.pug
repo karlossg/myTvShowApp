@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' action='')
+    div.form-group
+      label(for='title') Title:
+      input#title.form-control(type='text', placeholder='Name of show' name='title' required='true' value=(undefined===show ? '' : show.title) )
+    div.form-group
+      label(for='creator') Creator:
+      select#creator.form-control(type='select', placeholder='Select creator' name='creator' required='true' )
+        for creator in creators
+          if show
+            option(value=creator._id selected=(creator._id.toString()==show.creator ? 'selected' : false) ) #{creator.name}
+          else
+            option(value=creator._id) #{creator.name}
+    div.form-group
+      label(for='summary') Summary:
+      input#summary.form-control(type='textarea', placeholder='Summary' name='summary' value=(undefined===show ? '' : show.summary) required='true')
+    div.form-group
+      label(for='seasons') Seasons:
+      input#seasons.form-control(type='number', placeholder='Number of seasons' name='seasons' value=(undefined===show ? '' : show.seasons) required='true')
+    div.form-group
+      label(for='imdb_id') IMDB ID:
+      input#isbn.form-control(type='text', placeholder='IMDB ID' name='imdb_id' value=(undefined===show ? '' : show.imdb_id)) 
+    div.form-group
+      label(for='poster') Poster:
+      input#isbn.form-control(type='text', placeholder='Poster image link' name='poster' value=(undefined===show ? '' : show.poster))
+    div.form-group
+      label Genre:
+      div
+        for genre in genres
+          div(style='display: inline; padding-right:10px;')
+            input.checkbox-input(type='checkbox', name='genre', id=genre._id, value=genre._id, checked=genre.checked )
+            label(for=genre._id) #{genre.name}
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors 
+    ul
+      for error in errors
+        li!= error.msg
