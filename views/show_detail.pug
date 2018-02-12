@@ -2,14 +2,15 @@ extends layout
 
 block content
   h1 #{title}: #{show.title}
-
-  img.poster(src=show.poster, alt='', height='212', width='142')
+  if show.poster
+    img.poster(src=show.poster, alt='', height='212', width='142')
   
   p #[strong Creator:] 
     a(href=show.creator.url) #{show.creator.name}
   p #[strong Summary:] #{show.summary}
   p #[strong IMDB ID:] #{show.imdb_id}
-  p #[strong Sesons:] #{show.seasons}
+  if show.seasons 
+    p #[strong Sesons:] #{show.seasons}
   p #[strong Genre:]&nbsp;
     each val, index in show.genre
       a(href=val.url) #{val.name}
