@@ -1,0 +1,37 @@
+extends layout
+
+block content
+  h1 #{title}: #{show.title}
+
+  img.poster(src=show.poster, alt='', height='212', width='142')
+  
+  p #[strong Creator:] 
+    a(href=show.creator.url) #{show.creator.name}
+  p #[strong Summary:] #{show.summary}
+  p #[strong IMDB ID:] #{show.imdb_id}
+  p #[strong Sesons:] #{show.seasons}
+  p #[strong Genre:]&nbsp;
+    each val, index in show.genre
+      a(href=val.url) #{val.name}
+      if index < show.genre.length - 1
+        |, 
+  
+  //- div(style='margin-left:20px;margin-top:20px')
+  //-   h4 Copies
+    
+  //-   each val in book_instances
+  //-     hr
+  //-     if val.status=='Available'
+  //-       p.text-success #{val.status}
+  //-     else if val.status=='Maintenance'
+  //-       p.text-danger #{val.status}
+  //-     else
+  //-       p.text-warning #{val.status} 
+  //-     p #[strong Imprint:] #{val.imprint}
+  //-     if val.status!='Available'
+  //-       p #[strong Due back:] #{val.due_back}
+  //-     p #[strong Id:]&nbsp;
+  //-       a(href=val.url) #{val._id}
+ 
+  //-   else
+  //-     p There are no copies of this book in the library.

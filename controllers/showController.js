@@ -51,34 +51,34 @@ exports.show_detail = function (req, res) {
     }
     // Successful, so render.
     res.render('show_detail', { title: 'Title', show: results.show });
-  };
+  })
+}
+// Display show create form on GET.
+exports.show_create_get = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show create GET');
+};
 
-  // Display show create form on GET.
-  exports.show_create_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show create GET');
-  };
+// Handle show create on POST.
+exports.show_create_post = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show create POST');
+};
 
-  // Handle show create on POST.
-  exports.show_create_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show create POST');
-  };
+// Display show delete form on GET.
+exports.show_delete_get = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show delete GET');
+};
 
-  // Display show delete form on GET.
-  exports.show_delete_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show delete GET');
-  };
+// Handle show delete on POST.
+exports.show_delete_post = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show delete POST');
+};
 
-  // Handle show delete on POST.
-  exports.show_delete_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show delete POST');
-  };
+// Display show update form on GET.
+exports.show_update_get = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show update GET');
+};
 
-  // Display show update form on GET.
-  exports.show_update_get = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show update GET');
-  };
-
-  // Handle show update on POST.
-  exports.show_update_post = function (req, res) {
-    res.send('NOT IMPLEMENTED: Show update POST');
-  };
+// Handle show update on POST.
+exports.show_update_post = function (req, res) {
+  res.send('NOT IMPLEMENTED: Show update POST');
+};
