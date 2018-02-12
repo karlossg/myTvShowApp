@@ -1,3 +1,5 @@
+const async = require('async');
+const Show = require('../models/show');
 const Creator = require('../models/creator');
 
 // Display list of all Creators.
@@ -13,7 +15,26 @@ exports.creator_list = function (req, res) {
 
 // Display detail page for a specific Creator.
 exports.creator_detail = function (req, res) {
-  res.send('NOT IMPLEMENTED: Creator detail: ' + req.params.id);
+  async.parallel({
+    creator: function (callback) {
+      Creator.findById(req.params.id)
+        .exec(callback)
+    },
+    creators_shows: function (callback) {
+      Show.find({ 'creator': req.params.id }, 'title summary')
+        .exec(callback)
+    },
+  }, function (err, results) {
+    if (err) { return next(err); } // Error in API usage.
+    if (results.creator == null) { // No results.
+      var err = new Error('Creator not found');
+      err.status = 404;
+      return next(err);
+    }
+    // Successful, so render.
+    res.render('creator_detail', { title: 'Creator Detail', creator: results.creator, creator_shows: results.creators_shows });
+  });
+
 };
 
 // Display Creator create form on GET.

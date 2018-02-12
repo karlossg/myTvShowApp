@@ -1,0 +1,19 @@
+extends layout
+
+block content
+
+  h1 Creator: #{creator.name}
+  p #{creator.date_of_birth_formatted} - #{creator.date_of_death_formatted}
+  
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Shows
+    
+    dl
+    each show in creator_shows
+      dt 
+        a(href=show.url) #{show.title}
+      dd #{show.summary}
+
+    else
+      p This creator has no shows.
