@@ -152,12 +152,19 @@ exports.show_delete_get = function (req, res) {
     if (err) { return next(err) };
     //Successful, so render
     res.render('show_delete', { title: 'Delete Show', show: show });
-  }   
+  });
 };
 
 // Handle show delete on POST.
 exports.show_delete_post = function (req, res) {
-  res.send('NOT IMPLEMENTED: Show delete POST');
+  Show.findById(req.body.showid).exec(function (err, show) {
+    if (err) { return next(err); }
+    Show.findByIdAndRemove(req.body.showid, function deleteShow(err) {
+      if (err) { return next(err); }
+      // Success - go to shows list
+      res.redirect('/catalog/shows')
+    });
+  });
 };
 
 // Display show update form on GET.
