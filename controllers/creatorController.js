@@ -42,7 +42,7 @@ exports.creator_detail = function (req, res) {
 
 // Display Creator create form on GET.
 exports.creator_create_get = function (req, res) {
-  res.render('author_form', { title: 'Create Author' });
+  res.render('creator_form', { title: 'Add Creator' });
 };
 
 // Handle Show Creator create on POST.
@@ -76,7 +76,7 @@ exports.creator_create_post = [
     else {
       // Data from form is valid.
 
-      // Create an Author object with escaped and trimmed data.
+      // Add an Creator object with escaped and trimmed data.
       const creator = new Creator(
         {
           first_name: req.body.first_name,
@@ -84,9 +84,9 @@ exports.creator_create_post = [
           date_of_birth: req.body.date_of_birth,
           date_of_death: req.body.date_of_death
         });
-      author.save(function (err) {
+      creator.save(function (err) {
         if (err) { return next(err); }
-        // Successful - redirect to new author record.
+        // Successful - redirect to new creator record.
         res.redirect(creator.url);
       });
     }
