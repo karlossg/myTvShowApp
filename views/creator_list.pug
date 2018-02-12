@@ -7,7 +7,7 @@ block content
   each creator in creator_list
     li 
       a(href=creator.url) #{creator.name} 
-      | (#{creator.date_of_birth_formatted} - #{creator.date_of_death_formatted})
+      | (#{creator.date_of_birth_formatted}#{creator.date_of_death_formatted})
 
   else
     li There are no show creators.
