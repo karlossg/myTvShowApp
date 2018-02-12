@@ -142,7 +142,35 @@ exports.creator_delete_post = function (req, res) {
 
 // Display Creator update form on GET.
 exports.creator_update_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: Creator update GET');
+  // Get creator, shows and genres for form.
+  async.parallel({
+    creator: function (callback) {
+      Creator.findById(req.params.id).populate('show').populate('genre').exec(callback);
+    },
+    shows: function (callback) {
+      Show.find(callback);
+    },
+    genres: function (callback) {
+      Genre.find(callback);
+    },
+  }, function (err, results) {
+    if (err) { return next(err); }
+    if (results.creator == null) { // No results.
+      var err = new Error('Creator not found');
+      err.status = 404;
+      return next(err);
+    }
+    // Success.
+    // Mark our selected genres as checked.
+    for (var all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
+      for (var show_g_iter = 0; show_g_iter < results.show.genre.length; show_g_iter++) {
+        if (results.genres[all_g_iter]._id.toString() == results.show.genre[show_g_iter]._id.toString()) {
+          results.genres[all_g_iter].checked = 'true';
+        }
+      }
+    }
+    res.render('show_form', { title: 'Update Show', creators: results.creators, genres: results.genres, show: results.show });
+  });
 };
 
 // Handle Creator update on POST.
