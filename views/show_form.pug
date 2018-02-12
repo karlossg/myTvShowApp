@@ -7,12 +7,19 @@ block content
     div.form-group
       label(for='title') Title:
       input#title.form-control(type='text', placeholder='Name of show' name='title' required='true' value=(undefined===show ? '' : show.title) )
-    div.form-group
+     div.form-group
       label(for='creator') Creator:
-      select#creator.form-control(type='select', placeholder='Select creator' name='creator' required='true' )
+      select#creator.form-control(type='select' placeholder='Select creator' name='creator' required='true' )
         for creator in creators
           if show
-            option(value=creator._id selected=(creator._id.toString()==show.creator ? 'selected' : false) ) #{creator.name}
+            //- Handle GET form, where show.creatro is an object, and POST form, where it is a string.
+            option(
+              value=creator._id
+              selected=(
+                creator._id.toString()==show.creator._id
+                || creator._id.toString()==show.creator
+              ) ? 'selected' : false
+            ) #{creator.name}
           else
             option(value=creator._id) #{creator.name}
     div.form-group
