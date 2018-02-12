@@ -95,12 +95,49 @@ exports.creator_create_post = [
 
 // Display Creator delete form on GET.
 exports.creator_delete_get = function (req, res) {
-  res.send('NOT IMPLEMENTED: Creator delete GET');
+  async.parallel({
+    creator: function (callback) {
+      Creator.findById(req.params.id).exec(callback)
+    },
+    creators_shows: function (callback) {
+      Show.find({ 'creator': req.params.id }).exec(callback)
+    },
+  }, function (err, results) {
+    if (err) { return next(err); }
+    if (results.creator == null) { // No results.
+      res.redirect('/catalog/creators');
+    }
+    // Successful, so render.
+    res.render('creator_delete', { title: 'Delete Creator', creator: results.creator, creator_shows: results.creators_shows });
+  });
 };
 
 // Handle Creator delete on POST.
 exports.creator_delete_post = function (req, res) {
-  res.send('NOT IMPLEMENTED: Creator delete POST');
+  async.parallel({
+    creator: function (callback) {
+      Creator.findById(req.body.creatorid).exec(callback)
+    },
+    creators_shows: function (callback) {
+      Show.find({ 'creator': req.body.creatorid }).exec(callback)
+    },
+  }, function (err, results) {
+    if (err) { return next(err); }
+    // Success
+    if (results.creators_shows.length > 0) {
+      // Creator has shows. Render in same way as for GET route.
+      res.render('creator_delete', { title: 'Delete Creator', creator: results.creator, creator_shows: results.creators_shows });
+      return;
+    }
+    else {
+      // Creator has no shows. Delete object and redirect to the list of creators.
+      Creator.findByIdAndRemove(req.body.creatorid, function deleteCreator(err) {
+        if (err) { return next(err); }
+        // Success - go to creator list
+        res.redirect('/catalog/creators')
+      })
+    }
+  });
 };
 
 // Display Creator update form on GET.

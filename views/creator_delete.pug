@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 #{title}: #{creator.name}
+  p #{creator.date_of_birth_formatted}#{creator.date_of_death_formatted}
+  
+  if creator_shows.length
+  
+    p #[strong Delete the following shows before attempting to delete this creator.]
+  
+    div(style='margin-left:20px;margin-top:20px')
+
+      h4 Shows
+    
+      dl
+      each show in creator_shows
+        dt 
+          a(href=show.url) #{show.title}
+        dd #{show.summary}
+
+  else
+    p Do you really want to delete this Creator?
+    
+    form(method='POST' action='')
+      div.form-group
+        input#creatorid.form-control(type='hidden',name='creatorid', required='true', value=creator._id )
+
+      button.btn.btn-primary(type='submit') Delete
