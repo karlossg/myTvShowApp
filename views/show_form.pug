@@ -12,7 +12,7 @@ block content
       select#creator.form-control(type='select' placeholder='Select creator' name='creator' required='true' )
         for creator in creators
           if show
-            //- Handle GET form, where show.creatro is an object, and POST form, where it is a string.
+            //- Handle GET form, where show.creator is an object, and POST form, where it is a string.
             option(
               value=creator._id
               selected=(

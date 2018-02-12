@@ -88,7 +88,7 @@ exports.show_create_post = [
   body('title', 'Title must not be empty.').isLength({ min: 1 }).trim(),
   body('creator', 'Creator must not be empty.').isLength({ min: 1 }).trim(),
   body('summary', 'Summary must not be empty.').isLength({ min: 1 }).trim(),
-  // body('imdb_id', 'IMDB ID must not be empty').isLength({ min: 1 }).trim(),
+
 
   // Sanitize fields (using wildcard).
   sanitizeBody('*').trim().escape(),
@@ -219,7 +219,7 @@ exports.show_update_post = [
   body('title', 'Title must not be empty.').isLength({ min: 1 }).trim(),
   body('creator', 'Creator must not be empty.').isLength({ min: 1 }).trim(),
   body('summary', 'Summary must not be empty.').isLength({ min: 1 }).trim(),
-  // body('isbn', 'ISBN must not be empty').isLength({ min: 1 }).trim(),
+
 
   // Sanitize fields.
   sanitizeBody('title').trim().escape(),
