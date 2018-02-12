@@ -37,7 +37,7 @@ exports.genre_detail = function (req, res) {
   }, function (err, results) {
     if (err) { return next(err); }
     if (results.genre == null) { // No results.
-      var err = new Error('Genre not found');
+      const err = new Error('Genre not found');
       err.status = 404;
       return next(err);
     }
@@ -155,7 +155,7 @@ exports.genre_update_get = function (req, res) {
   Genre.findById(req.params.id, function (err, genre) {
     if (err) { return next(err); }
     if (genre == null) { // No results.
-      var err = new Error('Genre not found');
+      const err = new Error('Genre not found');
       err.status = 404;
       return next(err);
     }
@@ -180,7 +180,7 @@ exports.genre_update_post = [
     const errors = validationResult(req);
 
     // Create a genre object with escaped and trimmed data (and the old id!)
-    var genre = new Genre(
+    const genre = new Genre(
       {
         name: req.body.name,
         _id: req.params.id

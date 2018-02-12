@@ -47,7 +47,7 @@ exports.show_detail = function (req, res) {
   }, function (err, results) {
     if (err) { return next(err); }
     if (results.show == null) { // No results.
-      var err = new Error('Show not found');
+      const err = new Error('Show not found');
       err.status = 404;
       return next(err);
     }
@@ -100,7 +100,7 @@ exports.show_create_post = [
     const errors = validationResult(req);
 
     // Create a Show object with escaped and trimmed data.
-    var show = new Show(
+    const show = new Show(
       {
         title: req.body.title,
         creator: req.body.creator,
@@ -183,14 +183,14 @@ exports.show_update_get = function (req, res) {
   }, function (err, results) {
     if (err) { return next(err); }
     if (results.show == null) { // No results.
-      var err = new Error('Show not found');
+      const err = new Error('Show not found');
       err.status = 404;
       return next(err);
     }
     // Success.
     // Mark our selected genres as checked.
-    for (var all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
-      for (var show_g_iter = 0; show_g_iter < results.show.genre.length; show_g_iter++) {
+    for (const all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
+      for (const show_g_iter = 0; show_g_iter < results.show.genre.length; show_g_iter++) {
         if (results.genres[all_g_iter]._id.toString() == results.show.genre[show_g_iter]._id.toString()) {
           results.genres[all_g_iter].checked = 'true';
         }
@@ -237,7 +237,7 @@ exports.show_update_post = [
     const errors = validationResult(req);
 
     // Create a Show object with escaped/trimmed data and old id.
-    var show = new Show(
+    const show = new Show(
       {
         title: req.body.title,
         creator: req.body.creator,
