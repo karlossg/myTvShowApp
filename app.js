@@ -10,6 +10,8 @@ const mongoose = require('mongoose');
 const index = require('./routes/index');
 const users = require('./routes/users');
 const catalog = require('./routes/catalog');
+const compression = require('compression');
+const helmet = require('helmet');
 
 const app = express();
 
@@ -26,6 +28,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(helmet());
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -38,6 +42,7 @@ app.use(sassMiddleware({
   indentedSyntax: true, // true = .sass and false = .scss
   sourceMap: true
 }));
+app.use(compression()); //Compress all routes
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);

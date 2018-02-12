@@ -19,7 +19,7 @@ exports.index = function (req, res) {
       Genre.count(callback);
     },
   }, function (err, results) {
-    res.render('index', { title: 'My Tv Shows Home Page', error: err, data: results });
+    res.render('index', { title: 'My Tv Shows App', error: err, data: results });
   });
 };
 
