@@ -237,7 +237,7 @@ exports.show_update_post = [
     const errors = validationResult(req);
 
     // Create a Show object with escaped/trimmed data and old id.
-    var show = new ShowBook(
+    var show = new Show(
       {
         title: req.body.title,
         creator: req.body.creator,

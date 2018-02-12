@@ -7,7 +7,7 @@ block content
     div.form-group
       label(for='title') Title:
       input#title.form-control(type='text', placeholder='Name of show' name='title' required='true' value=(undefined===show ? '' : show.title) )
-     div.form-group
+    div.form-group
       label(for='creator') Creator:
       select#creator.form-control(type='select' placeholder='Select creator' name='creator' required='true' )
         for creator in creators
