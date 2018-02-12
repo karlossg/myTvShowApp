@@ -90,8 +90,14 @@ exports.show_create_post = [
   body('summary', 'Summary must not be empty.').isLength({ min: 1 }).trim(),
 
 
-  // Sanitize fields (using wildcard).
-  sanitizeBody('*').trim().escape(),
+  // Sanitize fields.
+  sanitizeBody('title').trim().escape(),
+  sanitizeBody('creator').trim().escape(),
+  sanitizeBody('summary').trim().escape(),
+  sanitizeBody('imdb_db').trim().escape(),
+  sanitizeBody('seasons').trim().escape(),
+  sanitizeBody('poster').trim(),
+  sanitizeBody('genre.*').trim().escape(),
 
   // Process request after validation and sanitization.
   (req, res, next) => {
@@ -189,8 +195,8 @@ exports.show_update_get = function (req, res) {
     }
     // Success.
     // Mark our selected genres as checked.
-    for (const all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
-      for (const show_g_iter = 0; show_g_iter < results.show.genre.length; show_g_iter++) {
+    for (let all_g_iter = 0; all_g_iter < results.genres.length; all_g_iter++) {
+      for (let show_g_iter = 0; show_g_iter < results.show.genre.length; show_g_iter++) {
         if (results.genres[all_g_iter]._id.toString() == results.show.genre[show_g_iter]._id.toString()) {
           results.genres[all_g_iter].checked = 'true';
         }
@@ -227,7 +233,7 @@ exports.show_update_post = [
   sanitizeBody('summary').trim().escape(),
   sanitizeBody('imdb_db').trim().escape(),
   sanitizeBody('seasons').trim().escape(),
-  sanitizeBody('poster').trim().escape(),
+  sanitizeBody('poster').trim(),
   sanitizeBody('genre.*').trim().escape(),
 
   // Process request after validation and sanitization.
